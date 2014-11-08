@@ -1,0 +1,8 @@
+<h1>Users#show</h1>
+<p>Count: <%= @count %></p>
+
+
+<div>
+  <%= link_to 'New task', new_user_task_path(current_user) %>
+  <%= link_to 'Tasks', user_tasks_path(current_user) %>
+</div>

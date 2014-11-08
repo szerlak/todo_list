@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
-  resources :tasks do
-    member do
-      get 'ajax_edit'
+  get 'users/show'
+
+  devise_for :users
+  root to: 'users#show'
+
+  resources :users do
+    resources :tasks, shallow: true do
+      member do
+        get 'ajax_edit'
+      end
     end
   end
 

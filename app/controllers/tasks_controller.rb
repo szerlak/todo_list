@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_action :load_resources, only: [:show, :edit, :update, :destroy, :ajax_edit]
+  before_action :authenticate_user!
 
   def index
     @tasks = Task.all
@@ -10,8 +11,12 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.create(task_parameters)
-    redirect_to tasks_path
+    @task = current_user.tasks.new(task_params)
+    if @task.save
+      redirect_to root_path
+    else
+      render 'new'
+    end
   end
 
   def show
@@ -24,13 +29,20 @@ class TasksController < ApplicationController
   end
 
   def update
-    @task.update!(task_parameters)
-    redirect_to tasks_path
+    respond_to do |format|
+      if @task.update(task_params)
+        format.html { redirect_to user_tasks_path(current_user) }
+        format.js { render plain: "Success" }
+      else
+        format.html { render 'edit' }
+        format.js { render plain: "Fail" }
+      end
+    end
   end
 
   def destroy
     @task.destroy
-    redirect_to tasks_path
+    redirect_to user_tasks_path(current_user)
   end
 
   protected
@@ -39,7 +51,7 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
   end
 
-  def task_parameters
+  def task_params
     params.require(:task).permit(:title, :description, :finished)
   end
 end

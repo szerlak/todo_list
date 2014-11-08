@@ -1,27 +1,30 @@
 <h1>Task#index</h1>
 <div>
-  <ul>
-    <% @tasks.each do |task| %>
-      <li>
-        <%= task.title %>
-        <%= link_to 'Show', task %>
-        <%= link_to 'Edit', edit_task_path(task) %>
-        <%= link_to 'Ajax Edit', ajax_edit_task_path(task) %>
-        <%= link_to 'Destroy', task, method: :delete %>
-      </li>
-    <% end %>
-  </ul>
-
   <table>
     <thead>
       <tr>
         <td>Title</td>
         <td>Description</td>
+        <td>Finished</td>
       </tr>
     </thead>
+    <tbody>
+      <% @tasks.each do |task| %>
+        <tr>
+          <td><%= task.title %></td>
+          <td><%= task.description %></td>
+          <td><%= task.finished %></td>
+          <td>
+            <%= link_to 'Show', task %>
+            <%= link_to 'Edit', edit_task_path(task) %>
+            <%= link_to 'Ajax Edit', ajax_edit_task_path(task) %>
+            <%= link_to 'Destroy', task, method: :delete %>
+          </td>
+        </tr>
+    <% end %>
 
-
+    </tbody>
   </table>
 
-  <%= link_to 'New', new_task_path %>
+  <%= link_to 'New', new_user_task_path(current_user) %>
 </div>
