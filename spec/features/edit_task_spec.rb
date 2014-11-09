@@ -21,14 +21,14 @@ describe 'edit task' do
 	end
 
 	it do
-	    go_to_edit_task_page 
+	  go_to_edit_task_page 
 		fill_in('Title', :with => 'changed')
 		fill_in('Description', :with => 'another description')
-	    check('Finished')
-	    click_button('Update Task')
-	    expect(current_path).to eq("/users/1/tasks")
-	    expect(page).to have_content('changed')
-        expect(page).to have_content('another description')
-        expect(page).to have_content('true')
+	  check('Finished')
+	  click_button('Update Task')
+	  expect(current_path).to eq("/users/1/tasks")
+	  expect(page).to have_content('changed')
+    expect(page).to have_content('another description')
+    expect(page).to have_content('true')
 	end	
 end
