@@ -1,3 +1,5 @@
 <h1>Task#edit</h1>
 
-<%= render "form" %>
+<%= form_for @task do |form| %>
+  <%= render partial: "form", locals: {form: form} %>
+<% end %>

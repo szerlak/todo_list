@@ -1,3 +1,5 @@
 <h1>Task#new</h1>
 
-<%= render "form" %>
+<%= form_for [current_user, @task] do |form| %>
+    <%= render partial: "form", locals: {form: form} %>
+<% end %>

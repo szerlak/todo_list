@@ -1,9 +1,8 @@
-<%= form_for [current_user, @task] do |f| %>
-    <%= f.label :title %>
-    <%= f.text_field :title %> <br />
-    <%= f.label :description %>
-    <%= f.text_area :description %> <br />
-    <%= f.label :finished %>
-    <%= f.check_box :finished %> <br />
-    <%= f.submit %>
-<% end %>
+
+<%= form.label :title %>
+<%= form.text_field :title %> <br />
+<%= form.label :description %>
+<%= form.text_area :description %> <br />
+<%= form.label :finished %>
+<%= form.check_box :finished %> <br />
+<%= form.submit %>
